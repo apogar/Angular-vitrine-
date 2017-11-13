@@ -1,0 +1,32 @@
+<div class="ui ">
+	<div class="ui secondary vertical menu">
+		<a class="item">
+			Account
+		</a>
+		<a class="item">
+			Settings    
+		</a>
+		<div class="ui dropdown item">
+			<i class="dropdown icon"></i>
+			Ancres
+			<div class="ui left label">{{chiffre}}</div>
+			<div class="menu">
+				<div class="header">Choix de l'ancre</div>
+				<a class="item" href="#ancre1">1</a>
+				<a class="item" href="#ancre2">2</a>
+				<a class="item" href="#ancre3">3</a>
+				<a class="item" href="#ancre4">4</a>
+				<a class="item" href="#ancre5">5</a>
+			</div>
+		</div>
+		<a href={{ancre}} class="ui tiny icon button" (click)="onClickMoins()">
+			<i class="minus icon">
+				<a href="#ancre{{chiffre}}"></a>
+			</i>
+		</a>
+		<a href={{ancre}} class="ui tiny icon button" (click)="onClickPlus()">
+			<i class="plus icon">
+			</i>
+		</a>
+	</div>
+</div>
