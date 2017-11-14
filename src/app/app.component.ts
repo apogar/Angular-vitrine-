@@ -33,25 +33,7 @@ declare let $: any;
 
 export class AppComponent implements OnInit{
   title = 'app';
-  private apiUrl = 'http://localhost:8000/name';
-  data: any = {};
-  
-  constructor(private http: Http) {
-	  console.log('test');
-	  this.getContacts();
-	  this.getData();
-  }
-  
-  getData(){
-	  return this.http.get(this.apiUrl).map((res: Response) => res.json());
-  }
-  
-  getContacts(){
-	  this.getData().subscribe(data => {
-		console.log(data);
-		this.data = data;
-	  })
-  }
+
 
   ngOnInit() {
 

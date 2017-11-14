@@ -11,9 +11,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BodyComponent } from './body/body.component';
 import { RouteComponent } from './route/route.component';
 import { VideComponent } from './vide/vide.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 const appRoutes: Routes = [
   { path: 'route', component: RouteComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: '', component: BodyComponent },
   { path: '**', component: VideComponent }
 ];
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     BodyComponent,
     RouteComponent,
-    VideComponent
+    VideComponent,
+    CalendarComponent
   ],
   imports: [
 	RouterModule.forRoot(

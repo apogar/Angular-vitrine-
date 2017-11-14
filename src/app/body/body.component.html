@@ -56,7 +56,8 @@
 					Test Button
 				</h4>
 				<div class="row">
-					<button class="ui icon huge animated button" id="settingbutton">
+					<button class="ui icon huge animated button" 
+					id="settingbutton">
 						<div class="visible content">
 							<i class="icon settings"></i>
 						</div>
@@ -64,7 +65,8 @@
 							<i class="icon options"></i>
 						</div>
 					</button>
-					<button class="circular ui icon huge button" (click)="onClickMe()" id="">
+					<button class="circular ui icon huge button" 
+					(click)="onClickMe()" id="">
 						<i class="icon home"></i>
 					</button>
 				</div>
@@ -129,6 +131,23 @@
 						Blue.
 					</div>
 				</div>
+				<table class="ui celled padded table">
+				<thead>
+					<tr class="center aligned">
+						<th>Name</th>
+						<th>Test</th>
+					</tr></thead>
+					<tbody>
+
+						<div *ngFor="let co of ApicallService.data.name;
+						let tt of ApicallService.data.test">
+							<tr class="center aligned">
+								<td>{{ co }}</td>
+								<td>{{ tt }}</td>
+							</tr>
+						</div>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -142,7 +161,8 @@
     Archive Old Messages
   </div>
   <div class="content">
-    <p>Your inbox is getting full, would you like us to enable automatic archiving of old messages?</p>
+    <p>Your inbox is getting full, 
+	would you like us to enable automatic archiving of old messages?</p>
   </div>
   <div class="actions">
     <div class="ui red basic cancel inverted button">
