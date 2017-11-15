@@ -132,16 +132,16 @@
 					</div>
 				</div>
 				<table class="ui celled padded table">
-				<thead>
-					<tr class="center aligned">
-						<th>Name</th>
-						<th>Test</th>
-					</tr></thead>
+					<thead>
+						<tr class="center aligned">
+							<th>Name</th>
+							<th>Test</th>
+						</tr>
+					</thead>
 					<tbody>
-
 						<div *ngFor="let co of ApicallService.data.name;
 						let tt of ApicallService.data.test">
-							<tr class="center aligned">
+							<tr class="center aligned full-width">
 								<td>{{ co }}</td>
 								<td>{{ tt }}</td>
 							</tr>

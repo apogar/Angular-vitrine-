@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class ApicallService {
 
-  private apiUrl = 'http://localhost:8000/';
+  private api = 'http://localhost:8000/';
   private nameUrl ='';
   data: any = {};
   
@@ -21,7 +21,7 @@ export class ApicallService {
   }
   
   getData(){	
-    this.nameUrl = this.apiUrl+'name';
+    this.nameUrl = this.api+'name';
 	return this.http.get(this.nameUrl).map((res: Response) => res.json());
   };
   
@@ -33,5 +33,11 @@ export class ApicallService {
 	  return this.data;
 	  });
   };
+  
+  getDate(){
+	  const url = this.api+'calendar';
+	  console.log(url);
+	  return this.http.get(url).map((res) => res.json());
+  }
 
 }
