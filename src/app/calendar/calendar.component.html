@@ -1,4 +1,49 @@
-<div>
-date : 
-{{datedd.day}}/{{datedd.month}}/{{datedd.year}} -- {{datedd.nb}}
+<div class="ui divider"></div>
+<div class="ui container">
+<div class="row">
+<table class="ui celled table">
+	<tr>
+		<th>
+			Lun
+		</th>
+		<th>
+			Mar
+		</th>
+		<th>
+			Mer
+		</th>
+		<th>
+			Jeu
+		</th>
+		<th>
+			Ven
+		</th>
+		<th>
+			Sam
+		</th>
+		<th>
+			Dim
+		</th>
+	</tr>		
+	<tr *ngFor="let i of temp(math.ceil((datedd.nb)/7)).fill();index as j">
+		<div *ngIf="j == 0;then deb else mid"></div>
+		<ng-template #deb> 
+			<td *ngFor="let n of temp(sem[0]-1).fill()">
+			</td>
+			<td *ngFor="let index of jour.slice(0,7-sem[0]+1)">
+				<div *ngIf="index == datedd.day;then ojd else other"></div>
+				<ng-template #other> <div>{{index}}</div></ng-template>
+				<ng-template #ojd><div style="color:blue">{{index}}</div></ng-template>		
+			</td>			
+		</ng-template>
+		<ng-template #mid> 
+			<td *ngFor="let index of jour.slice(7*j-sem[0]+1,(7-sem[0]+1)+ j*7)">
+				<div *ngIf="index == datedd.day;then ojd else other"></div>
+				<ng-template #other> <div>{{index}}</div></ng-template>
+				<ng-template #ojd><div style="color:blue">{{index}}</div></ng-template>		
+			</td>		
+		</ng-template>
+	</tr>
+</table>
+</div>
 </div>
