@@ -25,6 +25,15 @@ export class ApicallService {
 	return this.http.get(this.nameUrl).map((res: Response) => res.json());
   };
   
+   getDateplus(date){	
+    this.nameUrl = this.api+'dateplus/'+date;
+	return this.http.get(this.nameUrl).map((res: Response) => res.json());
+  };  
+  getDatemoins(date){	
+    this.nameUrl = this.api+'datemoins/'+date;
+	return this.http.get(this.nameUrl).map((res: Response) => res.json());
+  };
+  
   getContacts(){
 	  this.getData().subscribe(mm => {		
 		console.log('getdata   :');
@@ -32,6 +41,11 @@ export class ApicallService {
 		this.data = mm;
 	  return this.data;
 	  });
+  };
+  
+  getRdv(day){	
+    this.nameUrl = this.api+'rdv/'+day;
+	return this.http.get(this.nameUrl).map((res: Response) => res.json()); 
   };
   
   getDate(){
