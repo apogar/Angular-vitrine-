@@ -4,6 +4,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Http, Response } from '@angular/http';
+import { RequestOptions } from '@angular/http';
+import { RequestMethod } from '@angular/http';
+import { Headers } from '@angular/http';
+import { Request } from '@angular/http';
+
+
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -48,10 +55,38 @@ export class ApicallService {
 	return this.http.get(this.nameUrl).map((res: Response) => res.json()); 
   };
   
+  getRdvAll(year,month){	
+    this.nameUrl = this.api+'rdvAll/'+year+'/'+month;
+	return this.http.get(this.nameUrl).map((res: Response) => res.json()); 
+  };
+  
   getDate(){
 	  const url = this.api+'calendar';
-	  console.log(url);
 	  return this.http.get(url).map((res) => res.json());
+  }
+  
+  
+  postRdv(data){
+        var headers = new Headers(), authtoken = localStorage.getItem('authtoken');
+        headers.append("Content-Type", 'application/json');
+
+        if (authtoken) {
+        headers.append("Authorization", 'Token ' + authtoken)
+        }
+        headers.append("Accept", 'application/json');
+		
+		var request = new RequestOptions({
+            method: RequestMethod.Post,
+			url:this.api+'rdv',
+			headers: headers,
+            body: JSON.stringify(data)
+	  })
+	  
+	  return this.http.request(new Request(request)).map((res: Response) => {
+		  if(res) {
+			  return {status: res.status,json:res.json()}
+		  }
+		  });
   }
 
 }

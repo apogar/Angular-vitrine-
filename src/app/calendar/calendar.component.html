@@ -1,89 +1,89 @@
 <div class="ui divider"></div>
 <div class="ui container">
-<div class="row">
-<table class="ui celled nowrap table">
-<thead>
-	<tr>
-		<th class="left aligned">
-			<button class="ui icon button" 
-					(click)="datemoins()" id="">
-				<i class="angle double left icon"></i>
-			</button>
-		</th>
-		<th colspan="5" class="center aligned selectable">
-			{{datedd.month}}/{{datedd.year}}
-		</th>
-		<th class="right aligned">
-			<button class="ui icon button" 
+	<div class="row">
+		<table class="ui celled nowrap table">
+			<thead>
+				<tr>
+					<th class="left aligned">
+						<button class="ui icon button" 
+						(click)="datemoins()" id="">
+						<i class="angle double left icon"></i>
+					</button>
+				</th>
+				<th colspan="5" class="center aligned selectable">
+					{{datedd.month}}/{{datedd.year}}
+				</th>
+				<th class="right aligned">
+					<button class="ui icon button" 
 					(click)="dateplus()" id="">
-				<i class="angle double right icon"></i>
-			</button>
-		</th>
-	</tr>
-</thead>
-<tbody>
-	<tr>
-		<td>
-			Lun
-		</td>
-		<td>
-			Mar
-		</td>
-		<td>
-			Mer
-		</td>
-		<td>
-			Jeu
-		</td>
-		<td>
-			Ven
-		</td>
-		<td>
-			Sam
-		</td>
-		<td>
-			Dim
-		</td>
-	</tr>
-	<tr *ngFor="let i of temp(math.ceil((datedd.nb)+sem[0]/7)).fill();index as j">
-		<div *ngIf="j == 0;then deb else mid"></div>
-		<ng-template #deb> 
+					<i class="angle double right icon"></i>
+				</button>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				Lun
+			</td>
+			<td>
+				Mar
+			</td>
+			<td>
+				Mer
+			</td>
+			<td>
+				Jeu
+			</td>
+			<td>
+				Ven
+			</td>
+			<td>
+				Sam
+			</td>
+			<td>
+				Dim
+			</td>
+		</tr>
+		<tr *ngFor="let i of temp(math.ceil((datedd.nb)+sem[0]/7)).fill();index as j">
+			<div *ngIf="j == 0;then deb else mid"></div>
+			<ng-template #deb> 
 			<td class="" *ngFor="let n of temp(sem[0]-1).fill()">
 			</td>
 			<td class="selectable" *ngFor="let index of jour.slice(0,7-sem[0]+1)">
 				<div *ngIf="index == datedd.day;then ojd else other"></div>
 				<ng-template #other>
-					<div (click)="modal(index)"
-					id="{{index}}{{datedd.month}}{{datedd.year}}">
-					{{index}}</div>
-				</ng-template>
-				<ng-template #ojd>
-					<div (click)="modal(index)"
-					id="{{index}}{{datedd.month}}{{datedd.year}}"
-					style="color:blue">{{index}}</div>
-				</ng-template>		
-			</td>			
-		</ng-template>
-		<ng-template #mid> 
-			<td class="selectable" 
-			*ngFor="let index of jour.slice(7*j-sem[0]+1,(7-sem[0]+1)+ j*7)">
-				<div *ngIf="index == datedd.day;then ojd else other"></div>
-				<ng-template #other>
-					<div (click)="modal(index)"
-					id="{{index}}{{datedd.month}}{{datedd.year}}">
-						{{index}}
-					</div>
-				</ng-template>
-				<ng-template #ojd>
-					<div (click)="modal(index)"
-					id="{{index}}{{datedd.month}}{{datedd.year}}" 
-					style="color:blue">
-						{{index}}
-					</div>
-				</ng-template>
-			</td>	
-		</ng-template>
-	</tr>
+				<div (click)="modal(index)"
+				id="{{index}}{{datedd.month}}{{datedd.year}}">
+				{{index}}</div>
+			</ng-template>
+			<ng-template #ojd>
+			<div (click)="modal(index)"
+			id="{{index}}{{datedd.month}}{{datedd.year}}"
+			style="color:blue">{{index}}</div>
+		</ng-template>		
+	</td>			
+</ng-template>
+<ng-template #mid> 
+<td class="selectable" 
+*ngFor="let index of jour.slice(7*j-sem[0]+1,(7-sem[0]+1)+ j*7)">
+<div *ngIf="index == datedd.day;then ojd else other"></div>
+<ng-template #other>
+<div (click)="modal(index)"
+id="{{index}}{{datedd.month}}{{datedd.year}}">
+{{index}}
+</div>
+</ng-template>
+<ng-template #ojd>
+<div (click)="modal(index)"
+id="{{index}}{{datedd.month}}{{datedd.year}}" 
+style="color:blue">
+{{index}}
+</div>
+</ng-template>
+</td>	
+</ng-template>
+</tr>
 </tbody>
 </table>
 </div>
@@ -92,9 +92,20 @@
 <!------------------------------------------>
 
 <div class="ui basic modal">
-  <div class="ui icon header">
-    <i class="archive icon">
-		{{test}}
-	</i>
+	<div class="ui icon header" *ngFor="let name of rdv">
+		{{name}}
+	</div>
+	<div class="actions">
+		<form class="ui form" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+			<div class="field">
+				<div class="ui red horizontal label">First Name</div>
+				<input type="text" name="first" ngModel>
+			</div>
+			<div class="field">
+				<div class="ui red horizontal label">Last Name</div>
+				<input type="text"  name="last" ngModel>
+			</div>
+			<button class="ui button" type="submit">Submit</button>
+		</form>
   </div>
 </div>

@@ -16,15 +16,21 @@ declare let $: any;
   providers: [ApicallService]
 
 })
+
+ 
 export class CalendarComponent implements OnInit {
 	
+  public donnee: Rdv;
+  
   datedd = [];
+  dateMonth = [];
   tp = [];
   sem = [];
   jour = [];
   temp = Array;
   math = Math;
   day 	= 0;
+  dayModal 	= 0;
   month = 0;
   year 	= 0;
   rdv 	= 0;
@@ -32,6 +38,7 @@ export class CalendarComponent implements OnInit {
   constructor(private ApicallService: ApicallService) {
 		this.getd();
   }
+
   
   getd() {
 	  const promise = new Promise(resolve => {
@@ -45,19 +52,27 @@ export class CalendarComponent implements OnInit {
 				this.day 	= dd.day;
 				this.month 	= dd.month;
 				this.year	= dd.year;
+				this.ApicallService.getRdvAll(this.year,this.month).subscribe(data => {
+					console.log('data:');
+					console.log(data);
+					this.dateMonth = data;
+			});
 				resolve();
 			});
+
 	  });
 	  return promise;
   }
   
   modal(d){
 	console.log(d);
-	this.ApicallService.getRdv(d).subscribe(data => {
-		this.rdv = data;
-	});
+	this.dayModal = d;
 	$('.ui .table #'+d+this.month+this.year)
 	.on('click', function() {$('.ui.basic.modal').modal('show');});
+	this.ApicallService.getRdv(this.year+'-'+this.month+'-'+d).subscribe(data => {
+		this.rdv = data;
+		console.log(data);
+	});
   }
   
 dateplus() {
@@ -88,8 +103,26 @@ datemoins() {
 	});
 }
 
+  onSubmit(form: any): void {
+	this.donnee = new Rdv();
+	this.donnee.first = form.first;
+	this.donnee.last = form.last;
+	this.donnee.date = this.year+'-'+this.month+'-'+this.dayModal;
+    console.log(this.donnee);
+	this.ApicallService.postRdv(this.donnee).subscribe(data => {
+		console.log(data);
+	});
+  }
+
   ngOnInit() {	  
 	
   }
   
 }
+
+
+class Rdv{
+	first: string;
+	last: string;
+	date: string;
+ }
